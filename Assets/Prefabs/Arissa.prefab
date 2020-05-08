@@ -471,7 +471,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &6935950461826561113
 CapsuleCollider:
@@ -483,10 +483,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.19404589
-  m_Height: 1.895222
+  m_Radius: 0.20039165
+  m_Height: 1.8571475
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9215528, z: 0.00000010430813}
+  m_Center: {x: 0, y: 0.94059, z: -0.044420302}
 --- !u!114 &7130210023255209777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 1248327983913819116}
+  AddedVelocity: {x: 0, y: 0, z: 200}
 --- !u!1 &1702751835140629204
 GameObject:
   m_ObjectHideFlags: 0
