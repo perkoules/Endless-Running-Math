@@ -31,8 +31,7 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
         {
-            playerAnimator.SetTrigger("Jump");
-            playerRigdbody.AddForce(Vector3.up * 250, ForceMode.Impulse);
+            
         }
     }
     void FixedUpdate()

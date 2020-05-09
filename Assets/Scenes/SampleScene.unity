@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 65396970}
   - component: {fileID: 65396972}
   - component: {fileID: 65396971}
+  - component: {fileID: 65396973}
   m_Layer: 5
   m_Name: Panel_Container
   m_TagString: Untagged
@@ -571,6 +572,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65396969}
   m_CullTransparentMesh: 0
+--- !u!114 &65396973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65396969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff77961bbaffdc4c912ba0e6743c15b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtMath: {fileID: 681500911}
+  txtOption1: {fileID: 265188053}
+  txtOption2: {fileID: 2003301849}
+  txtOption3: {fileID: 472169103}
 --- !u!1 &83807619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,7 +1344,7 @@ GameObject:
   - component: {fileID: 265188054}
   - component: {fileID: 265188053}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txt_Option_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,7 +1687,7 @@ GameObject:
   - component: {fileID: 330842473}
   - component: {fileID: 330842472}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2160,7 +2177,7 @@ GameObject:
   - component: {fileID: 472169104}
   - component: {fileID: 472169103}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txt_Option_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2776,7 +2793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -130, y: -30}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &681500911
@@ -2798,7 +2815,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Math question here
+  m_text: '50+50
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2826,14 +2845,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40.55
+  m_fontSize: 44.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2864,13 +2883,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -229.22021, w: 0}
+  m_margin: {x: 0, y: 0, z: -3.5473022, w: 0}
   m_textInfo:
     textComponent: {fileID: 681500911}
-    characterCount: 22
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 4
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -7483,7 +7502,7 @@ GameObject:
   - component: {fileID: 2003301850}
   - component: {fileID: 2003301849}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txt_Option_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
