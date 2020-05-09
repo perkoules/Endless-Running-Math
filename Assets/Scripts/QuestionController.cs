@@ -7,21 +7,84 @@ using UnityEngine;
 public class QuestionController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtMath, txtOption1, txtOption2, txtOption3;
+    [SerializeField] public Button[] btnDifficulty;
 
-    private int randomForMin = 1;
-    // Start is called before the first frame update
-    void Start()
+    
+    
+    public void DifficultyButtons(int diff)
     {
-        Addition(randomForMin);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
+        Color green = new Color(0, 1, 0);
+        Color red = new Color(1, 0, 0);
+        if (btnDifficulty[diff].GetComponent<Image>().color == green)
         {
-            Division(randomForMin);
+            btnDifficulty[diff].GetComponent<Image>().color = red;
+        }
+        else
+        {
+            btnDifficulty[diff].GetComponent<Image>().color = green;
         }
     }
 
+    public int ProblemChooser(int randomForMin)
+    {
+
+        int randomChooser = Random.Range(0, 4);
+        Color green = new Color(0, 1, 0);
+        switch (randomChooser)
+        {
+            case 0:
+                if (btnDifficulty[0].GetComponent<Image>().color == green)
+                {
+                    return Addition(randomForMin);
+                }
+                break;
+            case 1:
+                if (btnDifficulty[0].GetComponent<Image>().color == green)
+                {
+                    return Addition(randomForMin);
+                }
+                else if (btnDifficulty[1].GetComponent<Image>().color == green)
+                {
+                    return Subtraction(randomForMin);
+                }
+                break;
+            case 2:
+                if (btnDifficulty[0].GetComponent<Image>().color == green)
+                {
+                    return Addition(randomForMin);
+                }
+                else if (btnDifficulty[1].GetComponent<Image>().color == green)
+                {
+                    return Subtraction(randomForMin);
+                }
+                else if (btnDifficulty[2].GetComponent<Image>().color == green)
+                {
+                    return Multiplication(randomForMin);
+                }
+                break;
+            case 3:
+                if (btnDifficulty[0].GetComponent<Image>().color == green)
+                {
+                    return Addition(randomForMin);
+                }
+                else if (btnDifficulty[1].GetComponent<Image>().color == green)
+                {
+                    return Subtraction(randomForMin);
+                }
+                else if (btnDifficulty[2].GetComponent<Image>().color == green)
+                {
+                    return Multiplication(randomForMin);
+                }
+                else if (btnDifficulty[3].GetComponent<Image>().color == green)
+                {
+                    return Division(randomForMin);
+                }
+                break;
+            default:
+                break;
+        }
+        return 0;
+    }
     public int Addition(int randomMin)
     {
         int randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3, storeAnswerTo;
@@ -136,9 +199,10 @@ public class QuestionController : MonoBehaviour
         txtMath.text = randomNumber1.ToString() + " * " + randomNumber2.ToString();
         return storeAnswerTo;
     }
-    public float Division(int randomMin)
+    public int Division(int randomMin)
     {
-        float randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3, storeAnswerTo;
+        float randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3;
+        int storeAnswerTo;
         randomNumber1 = Random.Range(randomMin, 10);
         randomNumber2 = Random.Range(randomMin, 10);
         answer = randomNumber1 / randomNumber2;
@@ -149,25 +213,25 @@ public class QuestionController : MonoBehaviour
                 optionNumber1 = answer;
                 optionNumber2 = answer + Random.Range(1, 10);
                 optionNumber3 = answer - Random.Range(1, 10);
-                txtOption1.text = optionNumber1.ToString();
-                txtOption2.text = optionNumber2.ToString();
-                txtOption3.text = optionNumber3.ToString();
+                txtOption1.text = optionNumber1.ToString("F2");
+                txtOption2.text = optionNumber2.ToString("F2");
+                txtOption3.text = optionNumber3.ToString("F2");
                 break;
             case 2:
                 optionNumber1 = answer + Random.Range(1, 10);
                 optionNumber2 = answer;
                 optionNumber3 = answer - Random.Range(1, 10);
-                txtOption1.text = optionNumber1.ToString();
-                txtOption2.text = optionNumber2.ToString();
-                txtOption3.text = optionNumber3.ToString();
+                txtOption1.text = optionNumber1.ToString("F2");
+                txtOption2.text = optionNumber2.ToString("F2");
+                txtOption3.text = optionNumber3.ToString("F2");
                 break;
             case 3:
                 optionNumber1 = answer + Random.Range(1, 10);
                 optionNumber2 = answer - Random.Range(1, 10);
                 optionNumber3 = answer;
-                txtOption1.text = optionNumber1.ToString();
-                txtOption2.text = optionNumber2.ToString();
-                txtOption3.text = optionNumber3.ToString();
+                txtOption1.text = optionNumber1.ToString("F2");
+                txtOption2.text = optionNumber2.ToString("F2");
+                txtOption3.text = optionNumber3.ToString("F2");
                 break;
         }
 

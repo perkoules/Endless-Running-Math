@@ -453,7 +453,13 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'arissa:Hips'\n\tTransform 'arissa:Head'\n\tTransform
+    'arissa:RightHandThumb3'\n\tTransform 'arissa:RightUpLeg'\n\tTransform 'arissa:LeftLeg'\n\tTransform
+    'arissa:LeftHandThumb1'\n\tTransform 'arissa:RightHandPinky1'\n\tTransform 'arissa:RightHandMiddle2'\n\tTransform
+    'arissa:RightHandMiddle3'\n\tTransform 'arissa:RightArm'\n\tand more ...\n\tFrom
+    animation clip 'mixamo.com'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -499,8 +505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad586e1cc93c504a8a3f0381c9282c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCamera: {fileID: 1248327983913819116}
-  AddedVelocity: {x: 0, y: 0, z: 200}
+  playerCamera: {fileID: 1248327983913819116}
+  questionController: {fileID: 0}
+  txtDistance: {fileID: 0}
 --- !u!1 &1702751835140629204
 GameObject:
   m_ObjectHideFlags: 0
