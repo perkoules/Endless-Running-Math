@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 3834669544062033306}
   m_Layer: 5
   m_Name: txtMeters
-  m_TagString: Untagged
+  m_TagString: Distance
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1404,7 +1404,7 @@ GameObject:
   - component: {fileID: 3834669544418216510}
   m_Layer: 5
   m_Name: txtStartMessage
-  m_TagString: Untagged
+  m_TagString: StartMsg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

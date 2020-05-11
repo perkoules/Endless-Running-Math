@@ -4,7 +4,6 @@ using UnityEditor.Playables;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
@@ -12,43 +11,36 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private QuestionController questionController;
-    [SerializeField] private TextMeshProUGUI txtDistance, txtStartMessage;
     [SerializeField] private FloorSpawner spawnerScript;
 
+    public bool bGameStarted = false;
+
     private Vector3 AddedVelocity = new Vector3(0,  0, 200);
-    private bool bGameStarted = false;
     private float distanceFromStart = 0f;
     private int randomForMin = 1, correctAnswer = 0;
     
-
     private Animator playerAnimator;
     private Rigidbody playerRigdbody;
+    private QuestionController questionController;
+    private TextMeshProUGUI txtDistance, txtStartMessage;
 
     void Start()
     {
+        questionController = FindObjectOfType<QuestionController>();
+        txtDistance = GameObject.FindGameObjectWithTag("Distance").GetComponent<TextMeshProUGUI>();
+        txtStartMessage = GameObject.FindGameObjectWithTag("StartMsg").GetComponent<TextMeshProUGUI>();
         playerRigdbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && bGameStarted == false)
-        {
-            bGameStarted = true; 
-            playerAnimator.SetBool("hasGameStarted", bGameStarted);
-            questionController.DifficultyButtons(0);
-            correctAnswer = questionController.ProblemChooser(randomForMin);
-            spawnerScript.SpawnStarter();
-            txtStartMessage.enabled = false;
-        }
         if (bGameStarted)
         {
             DifficultyController();
             JumpController();
         }
     }
-
     void FixedUpdate()
     {
         if (bGameStarted)
@@ -58,6 +50,14 @@ public class Player : MonoBehaviour
             playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);
         }
     }
+    public void Initialization()
+    {
+        bGameStarted = true;
+        playerAnimator.SetBool("hasGameStarted", bGameStarted);
+        questionController.DifficultyButtons(0);
+        correctAnswer = questionController.ProblemChooser(randomForMin);
+    }
+
     private void JumpController()
     {
         if (correctAnswer != 0)
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
     private void WrongAnswerGiven()
     {
         bGameStarted = false;
-        spawnerScript.CancelInvoke("SpawnFloor");
+        spawnerScript.CancelInvoke();
         playerAnimator.SetBool("WrongAnswer", true);
     }
 
