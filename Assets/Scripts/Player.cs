@@ -46,6 +46,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (bGameStarted)
+        {
+            distanceFromStart = gameObject.transform.position.z;
+            txtDistance.text = distanceFromStart.ToString("F2") + "m";
+            playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);
+        }
+    }
     private void JumpController()
     {
         if (correctAnswer != 0)
@@ -93,17 +102,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
-    }
-
-    void FixedUpdate()
-    {
-        if (bGameStarted)
+        else
         {
-            distanceFromStart = gameObject.transform.position.z;
-            txtDistance.text = distanceFromStart.ToString("F2") + "m";
-            playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);
+            correctAnswer = questionController.ProblemChooser(randomForMin);
         }
     }
+
 
     void DifficultyController()
     {

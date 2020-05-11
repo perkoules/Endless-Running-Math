@@ -9,79 +9,74 @@ public class QuestionController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtMath, txtOption1, txtOption2, txtOption3;
     [SerializeField] public Button[] btnDifficulty;
 
-    
-    
-    public void DifficultyButtons(int diff)
+    public void DifficultyButtons(int toggle)
     {
         Color green = new Color(0, 1, 0);
         Color red = new Color(1, 0, 0);
-        if (btnDifficulty[diff].GetComponent<Image>().color == green)
+        if (btnDifficulty[toggle].GetComponent<Image>().color != green)
         {
-            btnDifficulty[diff].GetComponent<Image>().color = red;
+            btnDifficulty[toggle].GetComponent<Image>().color = green;
         }
         else
         {
-            btnDifficulty[diff].GetComponent<Image>().color = green;
+            btnDifficulty[toggle].GetComponent<Image>().color = red;
         }
+        if(btnDifficulty[0].GetComponent<Image>().color == red && btnDifficulty[1].GetComponent<Image>().color == red &&
+            btnDifficulty[2].GetComponent<Image>().color == red &&btnDifficulty[3].GetComponent<Image>().color == red)
+        {
+            btnDifficulty[0].GetComponent<Image>().color = green;
+        }       
     }
 
     public int ProblemChooser(int randomForMin)
     {
-
         int randomChooser = Random.Range(0, 4);
         Color green = new Color(0, 1, 0);
-        switch (randomChooser)
+        print(randomChooser.ToString());
+
+        if (randomChooser == 0)
         {
-            case 0:
-                if (btnDifficulty[0].GetComponent<Image>().color == green)
-                {
-                    return Addition(randomForMin);
-                }
-                break;
-            case 1:
-                if (btnDifficulty[0].GetComponent<Image>().color == green)
-                {
-                    return Addition(randomForMin);
-                }
-                else if (btnDifficulty[1].GetComponent<Image>().color == green)
-                {
-                    return Subtraction(randomForMin);
-                }
-                break;
-            case 2:
-                if (btnDifficulty[0].GetComponent<Image>().color == green)
-                {
-                    return Addition(randomForMin);
-                }
-                else if (btnDifficulty[1].GetComponent<Image>().color == green)
-                {
-                    return Subtraction(randomForMin);
-                }
-                else if (btnDifficulty[2].GetComponent<Image>().color == green)
-                {
-                    return Multiplication(randomForMin);
-                }
-                break;
-            case 3:
-                if (btnDifficulty[0].GetComponent<Image>().color == green)
-                {
-                    return Addition(randomForMin);
-                }
-                else if (btnDifficulty[1].GetComponent<Image>().color == green)
-                {
-                    return Subtraction(randomForMin);
-                }
-                else if (btnDifficulty[2].GetComponent<Image>().color == green)
-                {
-                    return Multiplication(randomForMin);
-                }
-                else if (btnDifficulty[3].GetComponent<Image>().color == green)
-                {
-                    return Division(randomForMin);
-                }
-                break;
-            default:
-                break;
+            if (btnDifficulty[0].GetComponent<Image>().color == green)
+            {
+                return Addition(randomForMin);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else if (randomChooser == 1)
+        {
+            if (btnDifficulty[1].GetComponent<Image>().color == green)
+            {
+                return Subtraction(randomForMin);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else if (randomChooser == 2)
+        {
+            if (btnDifficulty[2].GetComponent<Image>().color == green)
+            {
+                return Multiplication(randomForMin);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else if (randomChooser == 3)
+        {
+            if (btnDifficulty[3].GetComponent<Image>().color == green)
+            {
+                return Division(randomForMin);
+            }
+            else
+            {
+                return 0;
+            }
         }
         return 0;
     }
