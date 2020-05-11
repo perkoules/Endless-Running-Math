@@ -14,11 +14,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private QuestionController questionController;
     [SerializeField] private TextMeshProUGUI txtDistance, txtStartMessage;
+    [SerializeField] private FloorSpawner spawnerScript;
 
-    private bool bGameStarted = false;
     private Vector3 AddedVelocity = new Vector3(0,  0, 200);
+    private bool bGameStarted = false;
     private float distanceFromStart = 0f;
     private int randomForMin = 1, correctAnswer = 0;
+    
 
     private Animator playerAnimator;
     private Rigidbody playerRigdbody;
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour
             playerAnimator.SetBool("hasGameStarted", bGameStarted);
             questionController.DifficultyButtons(0);
             correctAnswer = questionController.ProblemChooser(randomForMin);
+            spawnerScript.SpawnStarter();
             txtStartMessage.enabled = false;
         }
         if (bGameStarted)
@@ -63,42 +66,33 @@ public class Player : MonoBehaviour
             {
                 if (correctAnswer == 1)
                 {
-                    playerAnimator.SetTrigger("Jump");
-                    playerRigdbody.AddForce(Vector3.up * 250f, ForceMode.Impulse);
-                    correctAnswer = questionController.ProblemChooser(randomForMin);
+                    CorrectAnswerGiven();
                 }
                 else
                 {
-                    bGameStarted = false;
-                    playerAnimator.SetBool("WrongAnswer", true);
+                    WrongAnswerGiven();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 if (correctAnswer == 2)
                 {
-                    playerAnimator.SetTrigger("Jump");
-                    playerRigdbody.AddForce(Vector3.up * 250f, ForceMode.Impulse);
-                    correctAnswer = questionController.ProblemChooser(randomForMin);
+                    CorrectAnswerGiven();
                 }
                 else
                 {
-                    bGameStarted = false;
-                    playerAnimator.SetBool("WrongAnswer", true);
+                    WrongAnswerGiven();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 if (correctAnswer == 3)
                 {
-                    playerAnimator.SetTrigger("Jump");
-                    playerRigdbody.AddForce(Vector3.up * 250f, ForceMode.Impulse);
-                    correctAnswer = questionController.ProblemChooser(randomForMin);
+                    CorrectAnswerGiven();
                 }
                 else
                 {
-                    bGameStarted = false;
-                    playerAnimator.SetBool("WrongAnswer", true);
+                    WrongAnswerGiven();
                 }
             }
         }
@@ -108,6 +102,19 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    private void CorrectAnswerGiven()
+    {
+        playerAnimator.SetTrigger("Jump");
+        playerRigdbody.AddForce(Vector3.up * 250f, ForceMode.Impulse);
+        correctAnswer = questionController.ProblemChooser(randomForMin);
+    }
+    private void WrongAnswerGiven()
+    {
+        bGameStarted = false;
+        spawnerScript.CancelInvoke("SpawnFloor");
+        playerAnimator.SetBool("WrongAnswer", true);
+    }
 
     void DifficultyController()
     {

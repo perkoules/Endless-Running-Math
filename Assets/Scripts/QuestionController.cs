@@ -32,8 +32,6 @@ public class QuestionController : MonoBehaviour
     {
         int randomChooser = Random.Range(0, 4);
         Color green = new Color(0, 1, 0);
-        print(randomChooser.ToString());
-
         if (randomChooser == 0)
         {
             if (btnDifficulty[0].GetComponent<Image>().color == green)

@@ -509,6 +509,7 @@ MonoBehaviour:
   questionController: {fileID: 0}
   txtDistance: {fileID: 0}
   txtStartMessage: {fileID: 0}
+  spawnerScript: {fileID: 0}
 --- !u!1 &1702751835140629204
 GameObject:
   m_ObjectHideFlags: 0
