@@ -4,6 +4,7 @@ using UnityEditor.Playables;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
@@ -37,13 +38,17 @@ public class Player : MonoBehaviour
         if (bGameStarted)
         {
             DifficultyController();
+            JumpController();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("LoseScreen");
         }
     }
     void FixedUpdate()
     {
         if (bGameStarted)
         {
-            JumpController();
             distanceFromStart = gameObject.transform.position.z;
             txtDistance.text = distanceFromStart.ToString("F2") + "m";
             playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);

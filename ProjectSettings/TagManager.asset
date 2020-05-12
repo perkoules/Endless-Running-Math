@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Distance
   - StartMsg
+  - Points
+  - ScoreDisplay
   layers:
   - Default
   - TransparentFX
