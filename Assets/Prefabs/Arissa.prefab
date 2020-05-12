@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 7130210023255209777}
   m_Layer: 0
   m_Name: Arissa
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -503,6 +503,7 @@ MonoBehaviour:
   spawnerScript: {fileID: 5836186651318644038, guid: bd4c201a562f4504da8652d99bb06666,
     type: 3}
   bGameStarted: 0
+  whichButtonPressed: 
 --- !u!1 &1702751835140629204
 GameObject:
   m_ObjectHideFlags: 0

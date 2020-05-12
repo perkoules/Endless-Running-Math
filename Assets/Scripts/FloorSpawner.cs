@@ -9,6 +9,7 @@ public class FloorSpawner : MonoBehaviour
     public List<GameObject> floorVault, obstacleVault;
     public bool bGameStarted = false;
 
+    private bool initialized= false;
     private GameObject playerClone;
 
     private void Start()
@@ -18,9 +19,9 @@ public class FloorSpawner : MonoBehaviour
         playerClone = Instantiate(player, player.transform.position, player.transform.rotation, null);
         Destroy(standbyCamera);
     }
-    private void Update()
+    public void Update()
     {
-        if(Input.GetKey(KeyCode.Space) && bGameStarted == false)
+        if((Input.GetKey(KeyCode.Space) || initialized) && bGameStarted == false)
         {
             bGameStarted = true;
             SpawnStarter();
@@ -30,6 +31,10 @@ public class FloorSpawner : MonoBehaviour
         {
             DestroyBehind();
         }
+    }
+    public void Initialization(bool init)
+    {
+        initialized = init;
     }
     public void SpawnStarter()
     {

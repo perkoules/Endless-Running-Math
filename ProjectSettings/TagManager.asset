@@ -8,6 +8,7 @@ TagManager:
   - StartMsg
   - Points
   - ScoreDisplay
+  - StartButton
   layers:
   - Default
   - TransparentFX

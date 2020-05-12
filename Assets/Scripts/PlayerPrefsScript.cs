@@ -14,7 +14,5 @@ public class PlayerPrefsScript : MonoBehaviour
     public float GetStoredScore()
     {
         return PlayerPrefs.GetFloat("Score");
-    }
-    
-
+    }    
 }

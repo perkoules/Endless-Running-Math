@@ -11,7 +11,7 @@ public class LoseScreen : MonoBehaviour
     {
         txtScoreDisplay = GetComponent<TextMeshProUGUI>();
         scoreHolderScript = FindObjectOfType<PlayerPrefsScript>();
-        txtScoreDisplay.text = scoreHolderScript.GetStoredScore().ToString();
+        txtScoreDisplay.text = scoreHolderScript.GetStoredScore().ToString("F1");
     }
 
 }

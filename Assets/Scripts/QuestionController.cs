@@ -5,13 +5,24 @@ using TMPro;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.PlayerLoop;
 
 public class QuestionController : MonoBehaviour
 {
     public TextMeshProUGUI txtMath, txtOption1, txtOption2, txtOption3;
-    public Button[] btnDifficulty;
-    public int randomChooser = -1;
+    public Button[] btnDifficulty, btnAnswers;
+    [HideInInspector]public int randomChooser = -1;
 
+    private Player playerScript;
+
+    public void ListenForGUIButtons()
+    {
+        playerScript = FindObjectOfType<Player>();
+        btnAnswers[0].onClick.AddListener(() => playerScript.JumpController(0));
+        btnAnswers[1].onClick.AddListener(() => playerScript.JumpController(1));
+        btnAnswers[2].onClick.AddListener(() => playerScript.JumpController(2));
+
+    }
     public void DifficultyButtons(int toggle)
     {
         Color green = new Color(0, 1, 0);

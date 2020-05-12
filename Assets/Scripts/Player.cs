@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Camera playerCamera;
     public FloorSpawner spawnerScript;
     public bool bGameStarted = false;
+    public string whichButtonPressed;
 
     private int correctAnswer = 0, pointsObtained;  
     private float distanceFromStart = 0f;
@@ -23,7 +24,9 @@ public class Player : MonoBehaviour
     private Rigidbody playerRigdbody;
     private QuestionController questionController;
     private TextMeshProUGUI txtDistance, txtPoints, txtStartMessage;
+    private Button btnStart;
     private PlayerPrefsScript scoreHolderScript;
+
     void Start()
     {
         pointsObtained = 0;
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour
         txtDistance = GameObject.FindGameObjectWithTag("Distance").GetComponent<TextMeshProUGUI>();
         txtStartMessage = GameObject.FindGameObjectWithTag("StartMsg").GetComponent<TextMeshProUGUI>();
         txtPoints = GameObject.FindGameObjectWithTag("Points").GetComponent<TextMeshProUGUI>();
+        btnStart = GameObject.FindGameObjectWithTag("StartButton").GetComponent<Button>();
         playerRigdbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
     }
@@ -39,7 +43,9 @@ public class Player : MonoBehaviour
     {
         bGameStarted = true;
         playerAnimator.SetBool("hasGameStarted", bGameStarted);
-        txtStartMessage.enabled = false;
+        txtStartMessage.gameObject.SetActive(false);
+        btnStart.gameObject.SetActive(false);
+        questionController.ListenForGUIButtons();
         questionController.DifficultyButtons(0);
         correctAnswer = questionController.ProblemChooser();
     }
@@ -48,7 +54,7 @@ public class Player : MonoBehaviour
         if (bGameStarted)
         {
             DifficultyController();
-            JumpController();
+            JumpController(-1);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -65,12 +71,11 @@ public class Player : MonoBehaviour
             playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);
         }
     }
-
-    private void JumpController()
+    public void JumpController(int btn)
     {
         if (correctAnswer != 0)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.J) || btn == 0)
             {
                 if (correctAnswer == 1)
                 {
@@ -78,10 +83,10 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(WrongAnswerGiven());
+                    StartCoroutine(LosingActions());
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.K) || btn == 1)
             {
                 if (correctAnswer == 2)
                 {
@@ -89,10 +94,10 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(WrongAnswerGiven());
+                    StartCoroutine(LosingActions());
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.L) || btn == 2)
             {
                 if (correctAnswer == 3)
                 {
@@ -100,7 +105,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(WrongAnswerGiven());
+                    StartCoroutine(LosingActions());
                 }
             }
         }
@@ -135,15 +140,15 @@ public class Player : MonoBehaviour
         playerRigdbody.AddForce(Vector3.up * 250f, ForceMode.Impulse);
         correctAnswer = questionController.ProblemChooser();
     }
-    IEnumerator WrongAnswerGiven()
+    IEnumerator LosingActions()
     {
         bGameStarted = false;
         spawnerScript.SpawnStopper();
         playerCamera.transform.SetParent(null);
         playerAnimator.SetTrigger("WrongAnswer");
         gameObject.GetComponent<CapsuleCollider>().height = 0;
-        scoreHolderScript.ScoreHolder(pointsObtained);
-        yield return new WaitForSeconds(5);
+        scoreHolderScript.ScoreHolder(pointsObtained + distanceFromStart);
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene("LoseScreen");
     }
 
@@ -165,6 +170,14 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             questionController.DifficultyButtons(3);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.name == "Obstacle(Clone)")
+        {
+            StartCoroutine(LosingActions());
         }
     }
 }
