@@ -10,19 +10,18 @@ using TMPro;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private FloorSpawner spawnerScript;
-
+    public Camera playerCamera;
+    public FloorSpawner spawnerScript;
     public bool bGameStarted = false;
 
     private Vector3 AddedVelocity = new Vector3(0,  0, 200);
     private float distanceFromStart = 0f;
-    private int randomForMin = 1, correctAnswer = 0;
-    
+    private int randomForMin = 1, correctAnswer = 0;  
     private Animator playerAnimator;
     private Rigidbody playerRigdbody;
     private QuestionController questionController;
-    private TextMeshProUGUI txtDistance, txtStartMessage;
+    private TextMeshProUGUI txtDistance;
+    private TextMeshProUGUI txtStartMessage;
 
     void Start()
     {
@@ -38,13 +37,13 @@ public class Player : MonoBehaviour
         if (bGameStarted)
         {
             DifficultyController();
-            JumpController();
         }
     }
     void FixedUpdate()
     {
         if (bGameStarted)
         {
+            JumpController();
             distanceFromStart = gameObject.transform.position.z;
             txtDistance.text = distanceFromStart.ToString("F2") + "m";
             playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);
@@ -54,6 +53,7 @@ public class Player : MonoBehaviour
     {
         bGameStarted = true;
         playerAnimator.SetBool("hasGameStarted", bGameStarted);
+        txtStartMessage.enabled = false;
         questionController.DifficultyButtons(0);
         correctAnswer = questionController.ProblemChooser(randomForMin);
     }
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
     private void WrongAnswerGiven()
     {
         bGameStarted = false;
-        spawnerScript.CancelInvoke();
+        spawnerScript.SpawnStopper();
         playerAnimator.SetBool("WrongAnswer", true);
     }
 

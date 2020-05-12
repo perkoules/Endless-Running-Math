@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class QuestionController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI txtMath, txtOption1, txtOption2, txtOption3;
-    [SerializeField] public Button[] btnDifficulty;
+    public TextMeshProUGUI txtMath, txtOption1, txtOption2, txtOption3;
+    public Button[] btnDifficulty;
 
     public void DifficultyButtons(int toggle)
     {

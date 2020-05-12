@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class FloorSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject floorPrefab, obstaclePrefab, floors, obstacles;
-    [SerializeField] private GameObject player, standbyCamera;
-
-     
+    public GameObject floorPrefab, obstaclePrefab, floors, obstacles;
+    public GameObject player, standbyCamera;
     public List<GameObject> floorVault, obstacleVault;
     public bool bGameStarted = false;
 
@@ -38,6 +36,11 @@ public class FloorSpawner : MonoBehaviour
         InvokeRepeating("SpawnFloors", 0.1f, 3f);
         InvokeRepeating("SpawnObstacles", 0.1f, 1f);
     }
+    public void SpawnStopper()
+    {
+        CancelInvoke("SpawnFloors");
+        CancelInvoke("SpawnObstacles");
+    }
     void SpawnFloors()
     {
         GameObject floorClone = Instantiate(floorPrefab, floorVault[floorVault.Count - 1].transform.position + new Vector3(0f, 0f, 15f),
@@ -46,7 +49,7 @@ public class FloorSpawner : MonoBehaviour
     }
     void SpawnObstacles()
     {
-        GameObject obstacleClone = Instantiate(obstaclePrefab, obstacleVault[obstacleVault.Count - 1].transform.position + new Vector3(0f, 0f, Random.Range(10f, 15f)),
+        GameObject obstacleClone = Instantiate(obstaclePrefab, obstacleVault[obstacleVault.Count - 1].transform.position + new Vector3(0f, 0f, Random.Range(7f, 15f)),
             obstacleVault[obstacleVault.Count - 1].transform.rotation, obstacles.transform);
         obstacleVault.Add(obstacleClone);
     }
