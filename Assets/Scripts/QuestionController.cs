@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 public class QuestionController : MonoBehaviour
 {
     public TextMeshProUGUI txtMath, txtOption1, txtOption2, txtOption3;
     public Button[] btnDifficulty;
+    public int randomChooser = -1;
 
     public void DifficultyButtons(int toggle)
     {
@@ -28,15 +31,15 @@ public class QuestionController : MonoBehaviour
         }       
     }
 
-    public int ProblemChooser(int randomForMin)
+    public int ProblemChooser()
     {
-        int randomChooser = Random.Range(0, 4);
+        randomChooser = Random.Range(0, 4);
         Color green = new Color(0, 1, 0);
         if (randomChooser == 0)
         {
             if (btnDifficulty[0].GetComponent<Image>().color == green)
             {
-                return Addition(randomForMin);
+                return Addition();
             }
             else
             {
@@ -47,7 +50,7 @@ public class QuestionController : MonoBehaviour
         {
             if (btnDifficulty[1].GetComponent<Image>().color == green)
             {
-                return Subtraction(randomForMin);
+                return Subtraction();
             }
             else
             {
@@ -58,7 +61,7 @@ public class QuestionController : MonoBehaviour
         {
             if (btnDifficulty[2].GetComponent<Image>().color == green)
             {
-                return Multiplication(randomForMin);
+                return Multiplication();
             }
             else
             {
@@ -69,7 +72,7 @@ public class QuestionController : MonoBehaviour
         {
             if (btnDifficulty[3].GetComponent<Image>().color == green)
             {
-                return Division(randomForMin);
+                return Division();
             }
             else
             {
@@ -78,11 +81,11 @@ public class QuestionController : MonoBehaviour
         }
         return 0;
     }
-    public int Addition(int randomMin)
+    public int Addition()
     {
         int randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3, storeAnswerTo;
-        randomNumber1 = Random.Range(randomMin, 20);
-        randomNumber2 = Random.Range(randomMin, 20);
+        randomNumber1 = Random.Range(1, 20);
+        randomNumber2 = Random.Range(1, 20);
         answer = randomNumber1 + randomNumber2;
         storeAnswerTo = Random.Range(1, 4);
         switch (storeAnswerTo)
@@ -116,11 +119,11 @@ public class QuestionController : MonoBehaviour
         txtMath.text = randomNumber1.ToString() + " + " + randomNumber2.ToString();
         return storeAnswerTo;
     }
-    public int Subtraction(int randomMin)
+    public int Subtraction()
     {
         int randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3, storeAnswerTo;
-        randomNumber1 = Random.Range(randomMin, 20);
-        randomNumber2 = Random.Range(randomMin, 20);
+        randomNumber1 = Random.Range(1, 20);
+        randomNumber2 = Random.Range(1, 20);
         answer = randomNumber1 - randomNumber2;
         storeAnswerTo = Random.Range(1, 4);
         switch (storeAnswerTo)
@@ -154,11 +157,11 @@ public class QuestionController : MonoBehaviour
         txtMath.text = randomNumber1.ToString() + " - " + randomNumber2.ToString();
         return storeAnswerTo;
     }
-    public int Multiplication(int randomMin)
+    public int Multiplication()
     {
         int randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3, storeAnswerTo;
-        randomNumber1 = Random.Range(randomMin, 10);
-        randomNumber2 = Random.Range(randomMin, 10);
+        randomNumber1 = Random.Range(1, 10);
+        randomNumber2 = Random.Range(1, 10);
         answer = randomNumber1 * randomNumber2;
         storeAnswerTo = Random.Range(1, 4);
         switch (storeAnswerTo)
@@ -192,12 +195,12 @@ public class QuestionController : MonoBehaviour
         txtMath.text = randomNumber1.ToString() + " * " + randomNumber2.ToString();
         return storeAnswerTo;
     }
-    public int Division(int randomMin)
+    public int Division()
     {
         float randomNumber1, randomNumber2, answer, optionNumber1, optionNumber2, optionNumber3;
         int storeAnswerTo;
-        randomNumber1 = Random.Range(randomMin, 10);
-        randomNumber2 = Random.Range(randomMin, 10);
+        randomNumber1 = Random.Range(1, 10);
+        randomNumber2 = Random.Range(1, 10);
         answer = randomNumber1 / randomNumber2;
         storeAnswerTo = Random.Range(1, 4);
         switch (storeAnswerTo)

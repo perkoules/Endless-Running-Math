@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
@@ -15,24 +16,33 @@ public class Player : MonoBehaviour
     public FloorSpawner spawnerScript;
     public bool bGameStarted = false;
 
-    private Vector3 AddedVelocity = new Vector3(0,  0, 200);
+    private int correctAnswer = 0, pointsObtained;  
     private float distanceFromStart = 0f;
-    private int randomForMin = 1, correctAnswer = 0;  
+    private Vector3 AddedVelocity = new Vector3(0,  0, 200);
     private Animator playerAnimator;
     private Rigidbody playerRigdbody;
     private QuestionController questionController;
-    private TextMeshProUGUI txtDistance;
-    private TextMeshProUGUI txtStartMessage;
-
+    private TextMeshProUGUI txtDistance, txtPoints, txtStartMessage;
+    private PlayerPrefsScript scoreHolderScript;
     void Start()
     {
+        pointsObtained = 0;
         questionController = FindObjectOfType<QuestionController>();
+        scoreHolderScript = FindObjectOfType<PlayerPrefsScript>();
         txtDistance = GameObject.FindGameObjectWithTag("Distance").GetComponent<TextMeshProUGUI>();
         txtStartMessage = GameObject.FindGameObjectWithTag("StartMsg").GetComponent<TextMeshProUGUI>();
+        txtPoints = GameObject.FindGameObjectWithTag("Points").GetComponent<TextMeshProUGUI>();
         playerRigdbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
     }
-
+    public void Initialization()
+    {
+        bGameStarted = true;
+        playerAnimator.SetBool("hasGameStarted", bGameStarted);
+        txtStartMessage.enabled = false;
+        questionController.DifficultyButtons(0);
+        correctAnswer = questionController.ProblemChooser();
+    }
     void Update()
     {
         if (bGameStarted)
@@ -42,6 +52,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            bGameStarted = false;
             SceneManager.LoadScene("LoseScreen");
         }
     }
@@ -54,19 +65,11 @@ public class Player : MonoBehaviour
             playerRigdbody.AddForce(AddedVelocity, ForceMode.Acceleration);
         }
     }
-    public void Initialization()
-    {
-        bGameStarted = true;
-        playerAnimator.SetBool("hasGameStarted", bGameStarted);
-        txtStartMessage.enabled = false;
-        questionController.DifficultyButtons(0);
-        correctAnswer = questionController.ProblemChooser(randomForMin);
-    }
 
     private void JumpController()
     {
         if (correctAnswer != 0)
-        { 
+        {
             if (Input.GetKeyDown(KeyCode.A))
             {
                 if (correctAnswer == 1)
@@ -75,7 +78,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    WrongAnswerGiven();
+                    StartCoroutine(WrongAnswerGiven());
                 }
             }
             else if (Input.GetKeyDown(KeyCode.S))
@@ -86,7 +89,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    WrongAnswerGiven();
+                    StartCoroutine(WrongAnswerGiven());
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D))
@@ -97,29 +100,53 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    WrongAnswerGiven();
+                    StartCoroutine(WrongAnswerGiven());
                 }
             }
         }
-        else
+        else if (correctAnswer == 0)
         {
-            correctAnswer = questionController.ProblemChooser(randomForMin);
+            correctAnswer = questionController.ProblemChooser();
         }
     }
 
 
     private void CorrectAnswerGiven()
     {
+        switch (questionController.randomChooser)
+        {
+            case 0://Addition
+                pointsObtained += 10;
+                break;
+            case 1://Subtraction
+                pointsObtained += 15;
+                break;
+            case 2://Multiplication
+                pointsObtained += 25;
+                break;
+            case 3://Division
+                pointsObtained += 35;
+                break;
+            default:
+                break;
+        }
+        txtPoints.text = pointsObtained.ToString();
         playerAnimator.SetTrigger("Jump");
         playerRigdbody.AddForce(Vector3.up * 250f, ForceMode.Impulse);
-        correctAnswer = questionController.ProblemChooser(randomForMin);
+        correctAnswer = questionController.ProblemChooser();
     }
-    private void WrongAnswerGiven()
+    IEnumerator WrongAnswerGiven()
     {
         bGameStarted = false;
         spawnerScript.SpawnStopper();
-        playerAnimator.SetBool("WrongAnswer", true);
+        playerCamera.transform.SetParent(null);
+        playerAnimator.SetTrigger("WrongAnswer");
+        gameObject.GetComponent<CapsuleCollider>().height = 0;
+        scoreHolderScript.ScoreHolder(pointsObtained);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("LoseScreen");
     }
+
 
     void DifficultyController()
     {

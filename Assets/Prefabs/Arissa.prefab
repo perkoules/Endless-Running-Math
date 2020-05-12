@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 2682956791744187772}
   - component: {fileID: 5454357489937473542}
   - component: {fileID: 6935950461826561114}
-  - component: {fileID: 6935950461826561113}
+  - component: {fileID: 5573544720991250652}
   - component: {fileID: 7130210023255209777}
   m_Layer: 0
   m_Name: Arissa
@@ -430,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396290862932344687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7341598123522575594}
@@ -453,13 +453,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'arissa:Hips'\n\tTransform 'arissa:Head'\n\tTransform
-    'arissa:RightHandThumb3'\n\tTransform 'arissa:RightUpLeg'\n\tTransform 'arissa:LeftLeg'\n\tTransform
-    'arissa:LeftHandThumb1'\n\tTransform 'arissa:RightHandPinky1'\n\tTransform 'arissa:RightHandMiddle2'\n\tTransform
-    'arissa:RightHandMiddle3'\n\tTransform 'arissa:RightArm'\n\tand more ...\n\tFrom
-    animation clip 'mixamo.com'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -477,9 +471,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &6935950461826561113
+--- !u!136 &5573544720991250652
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -506,11 +500,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1248327983913819116}
-  questionController: {fileID: 0}
-  txtDistance: {fileID: 0}
-  txtStartMessage: {fileID: 0}
   spawnerScript: {fileID: 5836186651318644038, guid: bd4c201a562f4504da8652d99bb06666,
     type: 3}
+  bGameStarted: 0
 --- !u!1 &1702751835140629204
 GameObject:
   m_ObjectHideFlags: 0
