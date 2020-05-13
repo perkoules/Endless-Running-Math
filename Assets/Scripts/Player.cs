@@ -121,16 +121,16 @@ public class Player : MonoBehaviour
         switch (questionController.randomChooser)
         {
             case 0://Addition
-                pointsObtained += 10;
+                pointsObtained += 100;
                 break;
             case 1://Subtraction
-                pointsObtained += 15;
+                pointsObtained += 150;
                 break;
             case 2://Multiplication
-                pointsObtained += 25;
+                pointsObtained += 250;
                 break;
             case 3://Division
-                pointsObtained += 35;
+                pointsObtained += 350;
                 break;
             default:
                 break;
@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         spawnerScript.SpawnStopper();
         playerCamera.transform.SetParent(null);
         playerAnimator.SetTrigger("WrongAnswer");
-        gameObject.GetComponent<CapsuleCollider>().height = 0;
+        playerRigdbody.isKinematic = true;
         scoreHolderScript.ScoreHolder(pointsObtained + distanceFromStart);
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("LoseScreen");
