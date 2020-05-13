@@ -15,6 +15,8 @@ Gameplay:
 * 1, 2, 3, 4 to toggle an operation.
 
 
+[Play Online] https://perkoules.itch.io/endless-running-math
+
 [Portfolio] https://www.perkoules.com/
 
-[Youtube] 
+[Youtube] https://youtu.be/VsJaekyIpDY
