@@ -9,6 +9,7 @@ TagManager:
   - Points
   - ScoreDisplay
   - StartButton
+  - Music
   layers:
   - Default
   - TransparentFX

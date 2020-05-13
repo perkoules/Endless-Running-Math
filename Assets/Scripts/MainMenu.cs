@@ -14,4 +14,8 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void StopAnyMusic()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Music"));
+    }
 }
