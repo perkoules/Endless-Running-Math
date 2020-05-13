@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using System;
 using Random = UnityEngine.Random;
-using UnityEngine.PlayerLoop;
 
 public class QuestionController : MonoBehaviour
 {
